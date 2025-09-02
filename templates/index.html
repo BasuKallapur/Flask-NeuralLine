@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title  %}Index page{% endblock %}
+
+{%block content %}
+    <h1>Hello World</h1>
+    <ul>
+        {% for item in list %}
+            <li {% if item == 3 %} style="color:red" {% endif %}>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <p>{{list}}</p>
+    <a href=" {{ url_for('other')}}">Other</a>
+{% endblock %}
