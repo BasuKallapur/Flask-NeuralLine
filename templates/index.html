@@ -1,13 +1,63 @@
-{% extends 'base.html' %}
-{% block title  %}Index page{% endblock %}
+{% extends 'base.html' %} {% block title %}Index page{% endblock %} {% block
+content %}
 
-{%block content %}
-    <h1>Hello World</h1>
-    <ul>
-        {% for item in list %}
-            <li {% if item == 3 %} style="color:red" {% endif %}>{{ item }}</li>
-        {% endfor %}
-    </ul>
-    <p>{{list}}</p>
-    <a href=" {{ url_for('other')}}">Other</a>
+<h1>Hello World</h1>
+<form method="POST" action="{{ url_for('index') }}">
+  <input type="text" name="username" placeholder="username" />
+  <input type="password" name="password" placeholder="password" />
+  <input type="submit" value="Login" />
+</form>
+
+<h1>File Upload</h1>
+<form
+  method="POST"
+  action="{{ url_for('file_upload') }}"
+  enctype="multipart/form-data"
+>
+  <input
+    type="file"
+    name="file"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+           application/vnd.ms-excel,
+           text/plain,
+           application/pdf,
+           application/msword,
+           application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    required
+  />
+  <input type="submit" value="Upload File" />
+</form>
+
+<h1>Convert CSV</h1>
+<form
+  method="POST"
+  action="{{ url_for('convert_csv') }}"
+  enctype="multipart/form-data"
+>
+  <input
+    type="file"
+    name="file"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+           application/vnd.ms-excel"
+    required
+  />
+  <input type="submit" value="Upload File" />
+</form>
+
+<h1>Convert CSV TWO</h1>
+<form
+  method="POST"
+  action="{{ url_for('convert_csv_two') }}"
+  enctype="multipart/form-data"
+>
+  <input
+    type="file"
+    name="file"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+           application/vnd.ms-excel"
+    required
+  />
+  <input type="submit" value="Upload File" />
+</form>
+
 {% endblock %}
