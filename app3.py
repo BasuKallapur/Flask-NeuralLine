@@ -1,7 +1,7 @@
 import os
 import uuid
 import pandas as pd
-from flask import Flask, render_template, request, Response, send_from_directory
+from flask import Flask, render_template, request, Response, send_from_directory, jsonify
 import PyPDF2
 
 app = Flask(__name__, template_folder='templates')
@@ -71,6 +71,19 @@ def convert_csv_two():
 @app.route('/download/<filename>')
 def download(filename):
     return send_from_directory('temp', filename, download_name= 'result.csv')
+
+@app.route('/handle_post', methods=['POST'])
+def handle_post():
+    data = request.get_json()
+    greeting = data.get('greeting')
+    name = data.get('name')
+
+    # Write to file
+    with open('file.txt', 'w') as f:
+        f.write(f'{greeting}, {name}')
+
+    return jsonify({'message': 'Successfully written'})
+
 
 # main  
 if __name__ == '__main__':
